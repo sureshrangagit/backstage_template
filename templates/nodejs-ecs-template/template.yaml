@@ -26,7 +26,7 @@ spec:
       name: Fetch Template
       action: fetch:cookiecutter
       input:
-        url: ./templates/nodejs-ecs-template
+        url: .
         values:
           name: ${{ parameters.name }}
           repoName: ${{ parameters.repoName }}
