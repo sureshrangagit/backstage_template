@@ -35,7 +35,7 @@ spec:
       name: Publish to GitHub
       action: publish:github
       input:
-        repoUrl: github.com/neerajkheria/${{ parameters.repoName }}
+        repoUrl: github.com/sureshrangagit/${{ parameters.repoName }}
         defaultBranch: main
         description: Node.js ECS microservice scaffolded from Backstage Golden Path
 
