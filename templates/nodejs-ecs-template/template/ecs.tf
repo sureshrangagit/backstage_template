@@ -8,6 +8,7 @@ resource "aws_ecs_task_definition" "node_service" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = "256"
   memory                   = "512"
+  task_role_arn            = 
   container_definitions = jsonencode([
     {
       name      = "${var.service_name}-container"
@@ -31,8 +32,8 @@ resource "aws_ecs_service" "node_service" {
   desired_count   = 1
 
   network_configuration {
-    subnets         = ["subnet-0b5212a9e2776be68", "subnet-0a7bdc84674cdb40d"]
+    subnets         = ["subnet-009d39c3bcae90bb7", "subnet-0d68120ea42002aff"]
     assign_public_ip = true
-    security_groups = ["sg-03b86e4456c01d6dc"]
+    security_groups = ["sg-0904f3e24c39eec17"]
   }
 }
