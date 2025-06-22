@@ -1,0 +1,47 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: nodejs-ecs-service
+  title: Node.js Microservice on ECS (Golden Path)
+  description: Creates a Node.js app deployed via ECS Fargate with RDS and S3 on AWS
+spec:
+  owner: guests
+  type: service
+
+  parameters:
+    - title: Service Metadata
+      required:
+        - name
+        - repoName
+      properties:
+        name:
+          type: string
+          title: Service Name
+        repoName:
+          type: string
+          title: GitHub Repo Name
+
+  steps:
+    - id: fetch
+      name: Fetch Template
+      action: fetch:cookiecutter
+      input:
+        url: ./templates/nodejs-ecs-template
+        values:
+          name: ${{ parameters.name }}
+          repoName: ${{ parameters.repoName }}
+
+    - id: publish
+      name: Publish to GitHub
+      action: publish:github
+      input:
+        repoUrl: github.com/neerajkheria/${{ parameters.repoName }}
+        defaultBranch: main
+        description: Node.js ECS microservice scaffolded from Backstage Golden Path
+
+    - id: register
+      name: Register in Catalog
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
+        catalogInfoPath: catalog-info.yaml

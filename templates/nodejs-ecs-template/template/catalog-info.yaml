@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ${{ values.name }}
+  description: Node.js microservice deployed on ECS
+  tags:
+    - nodejs
+    - ecs
+    - mysql
+    - s3
+spec:
+  type: service
+  lifecycle: production
+  owner: guests
